@@ -8,7 +8,7 @@ on:
     branches:
       - 'develop'
     paths:
-      - "01-dashboard/build/**"
+      - "01_dashboard/build/**"
 
 jobs:
   build:
