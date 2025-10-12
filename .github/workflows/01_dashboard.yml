@@ -15,7 +15,8 @@ jobs:
   build:
     name: Build & Push
     runs-on: ubuntu-latest
-    
+    env:
+      BUILD_DIR: ./01-dashboard/build/
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -37,7 +38,9 @@ jobs:
           REPOSITORY: homelab-dashboard
           IMAGE_TAG: ${{ github.sha }}
         run: |
+          pushd ${{ env.BUILD_DIR }}
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker tag $REGISTRY/$REPOSITORY:latest-alpha .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
           docker push $REGISTRY/$REPOSITORY:latest-alpha
+          popd
