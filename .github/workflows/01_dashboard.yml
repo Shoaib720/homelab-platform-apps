@@ -16,7 +16,7 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     env:
-      BUILD_DIR: ./01-dashboard/build/
+      BUILD_DIR: ./01_dashboard/build/
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
