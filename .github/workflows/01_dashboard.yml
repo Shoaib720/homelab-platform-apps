@@ -9,6 +9,7 @@ on:
       - 'develop'
     paths:
       - "01_dashboard/build/**"
+      - ".github/workflows/01_dashboard.yml"
 
 jobs:
   build:
@@ -40,7 +41,7 @@ jobs:
         run: |
           pushd ${{ env.BUILD_DIR }}
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-          docker tag $REGISTRY/$REPOSITORY:latest-alpha .
+          docker tag $REGISTRY/$REPOSITORY:latest-alpha
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
           docker push $REGISTRY/$REPOSITORY:latest-alpha
           popd
