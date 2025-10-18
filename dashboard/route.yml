@@ -12,5 +12,4 @@ spec:
     services:
       - kind: Service
         name: homelab-dashboard
-        namespace: nonprod
         port: 80
