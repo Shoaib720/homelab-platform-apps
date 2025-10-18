@@ -5,7 +5,7 @@ source ../functions.sh
 NAMESPACE="argocd"
 
 destroy_argocd() {
-    helm uninstall argo-cd -n $NAMESPACE
+    helm uninstall argocd -n $NAMESPACE
     kubectl delete namespace $NAMESPACE
 }
 
