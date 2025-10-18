@@ -1,0 +1,46 @@
+deployment:
+  replicas: 1
+
+# -- Create a default IngressClass for Traefik
+ingressClass:  # @schema additionalProperties: false
+  enabled: true
+  isDefaultClass: true
+
+# -- Only dashboard & healthcheck IngressRoute are supported. It's recommended to create workloads CR outside of this Chart.
+ingressRoute:
+  dashboard:
+    enabled: false
+
+
+logs:
+  general:
+    # -- Alternative logging levels are TRACE, DEBUG, INFO, WARN, ERROR, FATAL, and PANIC.
+    level: "INFO"  # @schema enum:[TRACE,DEBUG,INFO,WARN,ERROR,FATAL,PANIC]; default: "INFO"
+
+
+additionalArguments: []
+
+env: []
+
+ports:
+  web:
+    redirections:
+      entrypoint:
+        web:
+          address: :80
+          http:
+            redirections:
+              entryPoint:
+                to: websecure
+                scheme: https
+                permanent: true
+  websecure:
+    tls:
+      enabled: true
+
+persistence:
+  enabled: false
+
+podSecurityContext:
+  fsGroup: 65532
+  fsGroupChangePolicy: "OnRootMismatch"

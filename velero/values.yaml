@@ -1,0 +1,34 @@
+configuration:
+  backupStorageLocation:
+    - name: default
+      provider: aws
+      bucket: homelab-velero-backups-nonprod
+      prefix: velero
+      config:
+        region: ap-south-1
+
+  volumeSnapshotLocation:
+    - name: default
+      provider: aws
+      config:
+        region: ap-south-1
+
+credentials:
+  useSecret: false
+
+serviceAccount:
+  server:
+    create: true
+    name: velero # DO NOT CHANGE, BOUND TO ALLOWED PRINCIPALS IN AWS IAM ROLE
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::970547335250:role/velero-irsa-role
+
+initContainers:
+  - name: velero-plugin-for-aws
+    image: velero/velero-plugin-for-aws:v1.13.0
+    volumeMounts:
+      - mountPath: /target
+        name: plugins
+
+securityContext:
+  fsGroup: 65534

@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: homelab-dashboard
-  namespace: nonprod
   labels:
     app: homelab-dashboard
 spec:
@@ -18,6 +17,5 @@ spec:
       containers:
         - name: homelab-dashboard
           image: 970547335250.dkr.ecr.ap-south-1.amazonaws.com/homelab-dashboard:latest-alpha
-          # image: nginx:alpine
           ports:
             - containerPort: 80

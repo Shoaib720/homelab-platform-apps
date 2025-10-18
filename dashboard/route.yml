@@ -2,7 +2,6 @@ apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: homelab-dashboard-route
-  namespace: nonprod
 spec:
   entryPoints:
     - websecure
@@ -13,5 +12,4 @@ spec:
     services:
       - kind: Service
         name: homelab-dashboard
-        namespace: nonprod
         port: 80
