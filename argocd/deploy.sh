@@ -14,7 +14,7 @@ deploy_argocd() {
     fi
 
     helm repo add argo https://argoproj.github.io/argo-helm
-    helm upgrade --install argo-cd argo/argo-cd --version 9.0.1 -n $NAMESPACE -f values.yml
+    helm upgrade --install argocd argo/argo-cd --version 9.0.1 -n $NAMESPACE -f values.yml
     kubectl apply -f route.yml -n $NAMESPACE
 }
 
