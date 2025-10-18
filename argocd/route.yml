@@ -9,5 +9,5 @@ spec:
     - kind: Rule
       match: Host(`argocd.deploywizard.in`)
       services:
-        - name: argocd-argocd-server
+        - name: argocd-server
           port: 80
