@@ -21,12 +21,12 @@ spec:
             - name: PGADMIN_DEFAULT_EMAIL
               valueFrom:
                 secretKeyRef:
-                  name: pgadmin-secrets
+                  name: pgadmin-credentials
                   key: PGADMIN_DEFAULT_EMAIL
             - name: PGADMIN_DEFAULT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: pgadmin-secrets
+                  name: pgadmin-credentials
                   key: PGADMIN_DEFAULT_PASSWORD
           volumeMounts:
             - name: pgadmin
