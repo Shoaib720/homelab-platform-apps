@@ -15,6 +15,7 @@ deploy_pgadmin() {
 
     kubectl apply -f pvc.yml -n $NAMESPACE
     kubectl apply -f secrets.yml -n $NAMESPACE
+    kubectl apply -f servers-cm.yml -n $NAMESPACE
     kubectl apply -f deployment.yml -n $NAMESPACE
     kubectl apply -f svc.yml -n $NAMESPACE
     kubectl apply -f route.yml -n $NAMESPACE

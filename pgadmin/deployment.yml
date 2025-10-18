@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: pgadmin
-          image: elestio/pgadmin:REL-9_8
+          image: dpage/pgadmin4:9.9.0
           env:
             - name: PGADMIN_LISTEN_PORT
               value: "8080"
@@ -29,9 +29,11 @@ spec:
                   name: pgadmin-credentials
                   key: PGADMIN_DEFAULT_PASSWORD
           volumeMounts:
-            - name: pgadmin
-              mountPath: /pgadmin4
+            - name: servers-json
+              mountPath: /pgadmin4/servers.json
+              subPath: servers.json
+              readOnly: true
       volumes:
-        - name: pgadmin
-          persistentVolumeClaim:
-            claimName: pgadmin
+        - name: servers-json
+          configMap:
+            name: pgadmin-servers

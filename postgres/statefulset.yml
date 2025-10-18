@@ -8,10 +8,16 @@ spec:
   selector:
     matchLabels:
       app: postgres
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+    whenScaled: Retain
   template:
     metadata:
       labels:
         app: postgres
+      annotations:
+        backup.velero.io/backup-volumes: "data"
+        description: "This statefulset is annotated for Velero volume backups"
     spec:
       terminationGracePeriodSeconds: 10
       containers:
