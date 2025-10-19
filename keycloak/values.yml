@@ -1,0 +1,75 @@
+replicas: 1
+
+command:
+  - "/opt/keycloak/bin/kc.sh"
+  - "start"
+  - "--http-enabled=true"
+
+image:
+  tag: "26.4.1"
+  # command:
+  #   - "/opt/keycloak/bin/kc.sh"
+  #   - "start"
+
+postgresql:
+  enabled: false
+
+extraEnv: |
+  - name: KC_PROXY
+    value: edge
+  - name: KC_HOSTNAME
+    value: https://keycloak.deploywizard.in
+  - name: KC_BOOTSTRAP_ADMIN_USERNAME
+    value: kcadmin
+  - name: KC_BOOTSTRAP_ADMIN_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: keycloak-admin-password
+        key: KEYCLOAK_PASSWORD
+
+dbchecker:
+  enabled: true
+
+database:
+  vendor: postgres
+  # hostname: __POSTGRES_HOSTNAME__
+  hostname: homelab-postgres-nonprod.cdema4akmzmf.ap-south-1.rds.amazonaws.com
+  port: 5432
+  database: keycloak
+  username: kcadmin
+  existingSecret: kc-postgres-admin-password
+
+
+# extraEnv: |
+#   - name: KEYCLOAK_USER_FILE
+#     value: /secrets/kc-creds/KEYCLOAK_USERNAME
+#   - name: KEYCLOAK_PASSWORD_FILE
+#     value: /secrets/ks-creds/KEYCLOAK_PASSWORD
+#   - name: DB_VENDOR
+#     value: postgres
+#   - name: DB_ADDR
+#     value: homelab-postgres-nonprod.cdema4akmzmf.ap-south-1.rds.amazonaws.com
+#   - name: DB_PORT
+#     value: "5432"
+#   - name: DB_DATABASE
+#     value: keycloak
+#   - name: DB_USER_FILE
+#     value: /secrets/db-creds/POSTGRES_USERNAME
+#   - name: DB_PASSWORD_FILE
+#     value: /secrets/db-creds/POSTGRES_PASSWORD
+
+# extraVolumeMounts: |
+#   - name: db-creds
+#     mountPath: /secrets/db-creds
+#     readOnly: true
+#   - name: kc-creds
+#     mountPath: /secrets/kc-creds
+#     readOnly: true
+
+# extraVolumes: |
+#   - name: db-creds
+#     secret:
+#       secretName: kc-postgres-credentials
+#   - name: kc-creds
+#     secret:
+#       secretName: kc-admin-credentials
