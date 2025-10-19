@@ -14,7 +14,9 @@ on:
 jobs:
   build:
     name: Build & Push
-    if: github.event.pull_request.merged == true
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
     env:
       BUILD_DIR: ./dashboard/build/
