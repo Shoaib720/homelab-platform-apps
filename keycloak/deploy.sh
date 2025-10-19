@@ -19,6 +19,8 @@ deploy_keycloak() {
     kubectl apply -f secrets.yml -n $NAMESPACE
 
     helm upgrade --install keycloak codecentric/keycloakx --version 7.1.4 -n $NAMESPACE -f values.yml
+
+    kubectl apply -f route.yml -n $NAMESPACE
 }
 
 deploy_keycloak
