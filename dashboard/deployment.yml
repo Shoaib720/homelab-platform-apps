@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
         - name: homelab-dashboard
+          imagePullPolicy: Always
           image: 970547335250.dkr.ecr.ap-south-1.amazonaws.com/homelab-dashboard:latest-alpha
           ports:
             - containerPort: 80

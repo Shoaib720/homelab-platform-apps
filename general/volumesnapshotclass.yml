@@ -5,4 +5,6 @@ metadata:
   labels:
     velero.io/csi-volumesnapshot-class: "true"
 driver: ebs.csi.aws.com
-deletionPolicy: Delete
+deletionPolicy: Retain
+parameters:
+  tagSpecification_1: "Key=project,Value=homelab"
